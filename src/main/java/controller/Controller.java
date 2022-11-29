@@ -33,8 +33,8 @@ public class Controller {
      */
     View gui;
     loginView lv;
-    // not henkilosto's Id can be used for Tilaus table, cor by Vadim
-    Henkilosto user;
+    // henkilosto's Id can be used in Tilaus table, cor by Vadim
+    private Henkilosto user;
     /**
      * Tietokannan kanssa asioiva DataAccesObject
      */
