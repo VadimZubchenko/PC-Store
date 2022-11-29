@@ -2,7 +2,7 @@
 
 ## Tietokonekauppa App installation. 
 
-- EDM: Apache NetBeans IDE 12.6
+- IDE: Apache NetBeans IDE 12.6
 - Java: 1.8.0_341
 - Maven
 - JavaFX
