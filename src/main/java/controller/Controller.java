@@ -85,7 +85,7 @@ public class Controller {
      * @param salasana Käyttäjän syöttämä salasana
      */
     public void loginUser(loginView loginscreen, Stage primaryStage, String nimi, String salasana) {
-        Henkilosto user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
+        user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
         
         //Kirjautuminen epäonnistui
         if (user == null) {
@@ -149,14 +149,14 @@ public class Controller {
         //Luo Tilaus_rivi lista productista
         List<Tilaus_rivi> tilaukset = tab1.getTilausrivit();
         Asiakas asiakas = tab1.getCustomer();
-        
+        Henkilosto henkilosto = user;
         //Tarkista että listassa on ainakin yksi tilaus
         if (tilaukset.isEmpty() == true) {
             //Ilmoita viewille että tilausrivejä ei ole yhtään
             tab1.lblWarning3.setText("Tilaus lista on tyhjä!");
             tab1.lblWarning3.setFill(Color.rgb(255, 0, 0));
         } else {
-            dao.luoTilaus(tilaukset,asiakas,null,hinta);
+            dao.luoTilaus(tilaukset,asiakas, henkilosto,hinta);
             tab1.companyTxt.clear();
             tab1.addressTxt.clear();
             tab1.emailTxt.clear();

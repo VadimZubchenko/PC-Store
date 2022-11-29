@@ -250,8 +250,7 @@ public class TietokonekauppaDAO {
             
             //Tallenna asiakas
             istunto.save(asiakas);
-            istunto.save(henkilosto);
-                        
+            
             //Luo Tilaus olio
             Tilaus tilaus = new Tilaus(asiakas, henkilosto, new Date(),hinta);
             istunto.saveOrUpdate(tilaus);
