@@ -1,6 +1,6 @@
 # Ohjelmistotuotantoprojekti: Easy warehouse management
 
-## Tietokonekauppa App installation. 
+## In order to install Tietokonekauppa App you need:
 
 - IDE: Apache NetBeans IDE 12.6
 - Java: 1.8.0_341
@@ -22,7 +22,7 @@ After creating DB you can check in mySql Workbanch EER Diagram by Database –> 
 Final ISSUE: After creating all needed tables there still was an error message "Schema-validation: missing table [hibernate_sequence]”
 
 1. add to all tables anotation: @GeneratedValue(strategy=GenerationType.IDENTITY)
-2. after that You could see in log message, which table misses column or has an error in their name.   
+2. after that you will see a log message, which table or column are missed or has an error in their name.   
         -  my fault was in the name ”Henkilisto” but in code anotation is ”Henkilosto” in ”TILAUS” table 
         - ”Hyllynumro” in the code anatation of ”OSA” table but in table itself it was as a ”Hyllynnumero”
 
