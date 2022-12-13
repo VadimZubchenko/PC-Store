@@ -252,7 +252,7 @@ public class TietokonekauppaDAO {
             istunto.save(asiakas);
             
             //Luo Tilaus olio
-            Tilaus tilaus = new Tilaus(asiakas, null, new Date(),hinta);
+            Tilaus tilaus = new Tilaus(asiakas, henkilosto, new Date(),hinta);
             istunto.saveOrUpdate(tilaus);
 
             //Looppaa tilaus rivejä
