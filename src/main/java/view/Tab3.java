@@ -81,8 +81,8 @@ public class Tab3 extends Tab {
     }
 
     private void createTab3() {
-        grid3.setHgap(0); // Horizontal gap
-        grid3.setVgap(0); // Vertical gap
+        grid3.setHgap(10); // Horizontal gap
+        grid3.setVgap(10); // Vertical gap
 
         btnOrders.setPrefSize(200, 100);
         btnOrders.setPadding(new Insets(10, 10, 10, 10));
