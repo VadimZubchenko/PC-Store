@@ -160,23 +160,23 @@ public class Tab2 extends Tab {
         tableVarasto.setEditable(true);
 
         brand.setStyle("-fx-font-size: 14pt;");
-        brand.setMinWidth(200);
+        brand.setMinWidth(150);
 
         product.setStyle("-fx-font-size: 14pt;");
-        product.setMinWidth(500);
+        product.setMinWidth(400);
 
         arriveDate.setStyle("-fx-font-size: 14pt;");
-        arriveDate.setMinWidth(200);
+        arriveDate.setMinWidth(150);
 
         amountTable.setStyle("-fx-font-size: 14pt;");
-        amountTable.setMinWidth(200);
+        amountTable.setMinWidth(100);
 
         additionalInfo.setStyle("-fx-font-size: 14pt;");
-        additionalInfo.setMinWidth(500);
+        additionalInfo.setMinWidth(300);
 
         tableVarasto.getColumns().addAll(brand, product, arriveDate, amountTable, additionalInfo);
         tableVarasto.setPrefHeight(700);
-        tableVarasto.setPrefWidth(1600);
+        tableVarasto.setPrefWidth(1200);
 
         final VBox vboxVarasto = new VBox();
         vboxVarasto.setSpacing(5);

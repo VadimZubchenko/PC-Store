@@ -104,11 +104,11 @@ public class Tab3 extends Tab {
         brand.setCellValueFactory(new PropertyValueFactory<Tilaus, Integer>("tilausId"));
 
         client.setStyle("-fx-font-size: 14pt;");
-        client.setMinWidth(1000);
+        client.setMinWidth(500);
         client.setCellValueFactory(new PropertyValueFactory<Tilaus, Asiakas >("asiakas"));
 
         orderDate.setStyle("-fx-font-size: 14pt;");
-        orderDate.setMinWidth(200);
+        orderDate.setMinWidth(250);
         orderDate.setCellValueFactory(new PropertyValueFactory<Tilaus, Date>("tilausPvm"));
 
         amount.setStyle("-fx-font-size: 14pt;");
@@ -118,7 +118,7 @@ public class Tab3 extends Tab {
 
         tableOrders.getColumns().addAll(brand, client, orderDate, amount);
         tableOrders.setPrefHeight(500);
-        tableOrders.setPrefWidth(1600);
+        tableOrders.setPrefWidth(1200);
 
         final VBox vboxOrders = new VBox();
         vboxOrders.setSpacing(5);
@@ -128,23 +128,23 @@ public class Tab3 extends Tab {
         tableDetails.setEditable(true);
 
         products.setStyle("-fx-font-size: 14pt;");
-        products.setMinWidth(500);
+        products.setMinWidth(300);
         products.setCellValueFactory(new PropertyValueFactory<Tilaus_rivi, Osa>("osa"));
 
         productamount.setStyle("-fx-font-size: 14pt;");
-        productamount.setMinWidth(500);
+        productamount.setMinWidth(300);
         productamount.setCellValueFactory(new PropertyValueFactory<Tilaus_rivi, Paketti>("paketti"));
 
         ordersum.setStyle("-fx-font-size: 14pt;");
-        ordersum.setMinWidth(150);
+        ordersum.setMinWidth(250);
         ordersum.setCellValueFactory(new PropertyValueFactory<Tilaus_rivi, Integer>("maara"));
 
         itemPrice.setStyle("-fx-font-size: 14pt;");
-        itemPrice.setMinWidth(150);
+        itemPrice.setMinWidth(250);
         itemPrice.setCellValueFactory(new PropertyValueFactory<Tilaus_rivi, Double>("hinta"));
 
         tableDetails.getColumns().addAll(products, productamount, ordersum, itemPrice);
-        tableDetails.setPrefHeight(300);
+        tableDetails.setPrefHeight(200);
         tableDetails.setPrefWidth(1600);
 
         final VBox vboxDetails = new VBox();

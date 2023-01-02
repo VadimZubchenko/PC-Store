@@ -27,6 +27,7 @@ import view.loginView;
  * @author Sami Sikkilä
  */
 public class Controller {
+    //luodaan singleton-luokan Controller staattinen muuttuja INSTANCE
     private static Controller INSTANCE = null;
     /**
      * Käyttöliittymät
@@ -35,6 +36,7 @@ public class Controller {
     loginView lv;
     // henkilosto's Id can be used in Tilaus table, cor by Vadim
     private Henkilosto user;
+    
     /**
      * Tietokannan kanssa asioiva DataAccesObject
      */
@@ -56,6 +58,8 @@ public class Controller {
      * Luo Controllerista olion, ellei sitä ole vielä aikaisemmin luotu
      * @return Controller olio
      */
+
+    //käytetään getInstance-metoodi singleton-luokan Controller:in olion luomiseen
     public static synchronized Controller getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Controller();

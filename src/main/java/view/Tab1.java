@@ -228,19 +228,19 @@ public class Tab1 extends Tab {
 
         
         productCol.setStyle("-fx-font-size: 12pt;");
-        productCol.setMinWidth(400);
+        productCol.setMinWidth(200);
         productCol.setCellValueFactory(
                 new PropertyValueFactory<Product, String>("name"));
 
         
         amountCol.setStyle("-fx-font-size: 12pt;");
-        amountCol.setMinWidth(200);
+        amountCol.setMinWidth(100);
         amountCol.setCellValueFactory(
                 new PropertyValueFactory<Product, Integer>("amount"));
 
         
         priceCol.setStyle("-fx-font-size: 12pt;");
-        priceCol.setMinWidth(150);
+        priceCol.setMinWidth(100);
         priceCol.setCellValueFactory(
                 new PropertyValueFactory<Product, Double>("price"));
 

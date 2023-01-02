@@ -19,8 +19,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class TietokonekauppaDAO {
 
+    // luodaan session tietokantaan yhdistämiseen
     SessionFactory istuntotehdas = null;
     final StandardServiceRegistry registry;
+    // luodaan lokin pitäminen
     private static final Logger LOGGER = Logger.getLogger(TietokonekauppaDAO.class.getName());
 
     /**
