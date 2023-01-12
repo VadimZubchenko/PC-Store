@@ -47,7 +47,7 @@ public class Controller {
     private Encryption encryption = Encryption.getInstance();
 
     /**
-     * Luo Controller olion
+     * Luo Controller olion 
      */
     private Controller() {
         this.dao = new TietokonekauppaDAO();
@@ -59,7 +59,7 @@ public class Controller {
      * @return Controller olio
      */
 
-    //käytetään getInstance-metoodi singleton-luokan Controller:in olion luomiseen
+    //käytetään getInstance-metoodi singleton-luokan ainoan Controller:in olion luomiseen
     public static synchronized Controller getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Controller();

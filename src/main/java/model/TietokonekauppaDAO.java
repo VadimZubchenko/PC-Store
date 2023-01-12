@@ -16,7 +16,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-
 public class TietokonekauppaDAO {
 
     // luodaan session tietokantaan yhdistämiseen
@@ -46,17 +45,19 @@ public class TietokonekauppaDAO {
             LOGGER.log(Level.SEVERE, "Istuntotehtaan luonti epäonnistui", e);
         }
     }
-    
+
     /**
      * @return result palauttaa listan kaikista Paketti riveistä
      */
     public List<Paketti> readPaketit() {
-        
+        // luodaan ArrayList 'paketit' mihin säilytetään tietokannan sisältöä
         ArrayList<Paketti> paketit = new ArrayList<>();
         Session istunto = istuntotehdas.openSession();
         try {
+            //instunto-oliota 'istunto' pyydetään aloittamaan transactio            
             Transaction transaction = istunto.beginTransaction();
-            //@SuppressWarnings("unchecked")
+            //transaktion sisään kirjoitetaan suritettavat operaatiot
+            //@SuppressWarnings("unchecked") // this warning tells the compiler that what you're doing really will be legal at execution time.
             List<Paketti> result = istunto.createQuery("from Paketti").list();
             for (Paketti v : result) {
                 paketit.add(new Paketti(v.getPaketinNimi(), v.getVarastoMaara(), v.getPaketinHinta()));
@@ -73,7 +74,7 @@ public class TietokonekauppaDAO {
         }
 
     }
-    
+
     /**
      * @return result palauttaa listan kaikista Osa riveistä
      */
@@ -82,7 +83,7 @@ public class TietokonekauppaDAO {
         Session istunto = istuntotehdas.openSession();
         try {
             Transaction transaction = istunto.beginTransaction();
-            
+
             List<Osa> result = istunto.createQuery("from Osa").list();
             for (Osa v : result) {
                 osat.add(new Osa(v.getOsaNimi(), v.getOsaHinta()));
@@ -158,7 +159,7 @@ public class TietokonekauppaDAO {
      * @return henkilosto palauttaa listan Henkilosto taulun riveistä
      */
     public List<Henkilosto> haeHenkilosto() {
-        
+
         ArrayList<Henkilosto> henkilosto = new ArrayList<>();
         Session istunto = istuntotehdas.openSession();
         try {
@@ -223,7 +224,7 @@ public class TietokonekauppaDAO {
         }
         return id;
     }
-    
+
     /**
      * Poistaa rivin Henkilosto taulusta annetun Henkilosto olion perusteella
      *
@@ -246,15 +247,15 @@ public class TietokonekauppaDAO {
      *
      * @param tilaukset - asikkaiden valmiit tilaukset
      */
-    public void luoTilaus(List<Tilaus_rivi> tilaukset,Asiakas asiakas, Henkilosto henkilosto, Double hinta) {
+    public void luoTilaus(List<Tilaus_rivi> tilaukset, Asiakas asiakas, Henkilosto henkilosto, Double hinta) {
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
-            
+
             //Tallenna asiakas
             istunto.save(asiakas);
-            
+
             //Luo Tilaus olio
-            Tilaus tilaus = new Tilaus(asiakas, henkilosto, new Date(),hinta);
+            Tilaus tilaus = new Tilaus(asiakas, henkilosto, new Date(), hinta);
             istunto.saveOrUpdate(tilaus);
 
             //Looppaa tilaus rivejä
@@ -303,10 +304,10 @@ public class TietokonekauppaDAO {
             return null;
         }
     }
-    
+
     /**
      * Hakee objektin id:n perusteella.
-     * 
+     *
      * @param id haettava id numero
      * @param object haettavan objektin tyyppi
      * @return haettu objekti
@@ -318,13 +319,13 @@ public class TietokonekauppaDAO {
         } catch (Exception e) {
             LOGGER.log(Level.FINE, e.toString(), e);
             return null;
-        }    
+        }
     }
-    
+
     /**
-     * Hakee ja palauttaa objektin alirivit.
-     * Vain Tilaus ja Paketti objekteilla on alirivejä.
-     * 
+     * Hakee ja palauttaa objektin alirivit. Vain Tilaus ja Paketti objekteilla
+     * on alirivejä.
+     *
      * @param obj objekti jonka alirivit haetaan
      * @return objektin alirivit
      */
@@ -347,22 +348,22 @@ public class TietokonekauppaDAO {
         } catch (Exception e) {
             LOGGER.log(Level.FINE, e.toString(), e);
             return null;
-        }    
+        }
     }
-    
+
     /**
-     * Poistaa objektin tietokannasta. 
-     * Jos objektilla on alirivejä ne poistetaan myös. 
-     * 
+     * Poistaa objektin tietokannasta. Jos objektilla on alirivejä ne poistetaan
+     * myös.
+     *
      * @param obj poistettava objekti
      */
     public void objectDelete(Object obj) {
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
-            
+
             //Delete main object
             istunto.delete(obj);
-            
+
             //Jos poistettavalla objektilla on aliobjekteja niin poista ne ensin
             if (obj instanceof Tilaus) {
                 //Hae ja poista tilauksen rivit
@@ -372,7 +373,7 @@ public class TietokonekauppaDAO {
                         istunto.delete(listobject);
                     }
                 }
-                
+
                 //Poista tilauksen asiakas
                 istunto.delete(((Tilaus) obj).getAsiakas());
             } else if (obj instanceof Paketti) {
@@ -389,12 +390,12 @@ public class TietokonekauppaDAO {
             LOGGER.log(Level.FINE, e.toString(), e);
         }
     }
-    
+
     /**
      * Tallenna objekti ja sen alirivit.
      *
      * Hyödyllinen metodi tilauksen/paketin ja jokaisen sen rivin tallennukseen.
-     * 
+     *
      * @param obj tallennettava objekti
      * @param obj_rows tallennettavan objektin alirivit
      */
@@ -402,29 +403,29 @@ public class TietokonekauppaDAO {
     public void objectSaveOrUpdate(Object obj, ArrayList<Object> obj_rows) {
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
-            
+
             //Tallenna yksittäinen objekti
             if (obj != null) {
                 istunto.saveOrUpdate(obj);
             }
-            
+
             //Tallenna objekti lista jos niitä on annettu
             if (obj_rows != null) {
                 for (Object row : obj_rows) {
                     istunto.saveOrUpdate(row);
                 }
             }
-            
+
             istunto.getTransaction().commit();
         } catch (Exception e) {
             LOGGER.log(Level.FINE, e.toString(), e);
         }
     }
-    
+
     /**
-     * Tallenna yksi objekti.
-     * Metodia voi käyttää minkä tahansa taulun tallentamiseen.
-     * 
+     * Tallenna yksi objekti. Metodia voi käyttää minkä tahansa taulun
+     * tallentamiseen.
+     *
      * @param obj tallennettava objekti
      */
     public void objectSaveOrUpdate(Object obj) {
@@ -436,17 +437,17 @@ public class TietokonekauppaDAO {
             LOGGER.log(Level.FINE, e.toString(), e);
         }
     }
-    
+
     /**
      * Tallenna joukko objekteja samalla kertaa.
-     * 
+     *
      * @param obj_list lista tallennettavista objekteista
-     * 
+     *
      */
     public void objectListSaveOrUpdate(ArrayList<Object> obj_list) {
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
-            for(Object obj : obj_list) {
+            for (Object obj : obj_list) {
                 istunto.save(obj);
             }
             istunto.getTransaction().commit();
@@ -454,10 +455,10 @@ public class TietokonekauppaDAO {
             LOGGER.log(Level.FINE, e.toString(), e);
         }
     }
-    
+
     /**
      * Hakee tietokannasta halutun vuoden kuukausitiedot
-     * 
+     *
      * @param year etsittävä vuosi
      * @return palauttaa listan vuosien myyntitiedoista
      */
@@ -466,8 +467,8 @@ public class TietokonekauppaDAO {
         try (Session istunto = istuntotehdas.openSession()) {
             Transaction ta = istunto.beginTransaction();
             List<Tilaus> tilausList = istunto.createQuery("from Tilaus").list();
-            for (Tilaus dt :
-                    tilausList) {
+            for (Tilaus dt
+                    : tilausList) {
 
                 switch (dt.getTilausPvm().getMonth()) {
                     case Calendar.JANUARY:
