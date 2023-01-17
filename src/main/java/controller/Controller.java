@@ -24,15 +24,20 @@ import view.loginView;
 
 /**
  * Sovelluksen toiminnallisuutta ohjaava luokka
+ *
  * @author Sami Sikkilä
  */
 public class Controller {
+
+    //luodaan singleton-luokan Controller staattinen muuttuja INSTANCE
     private static Controller INSTANCE = null;
     /**
      * Käyttöliittymät
      */
     View gui;
     loginView lv;
+    private Henkilosto user;
+
     /**
      * Tietokannan kanssa asioiva DataAccesObject
      */
@@ -52,18 +57,21 @@ public class Controller {
 
     /**
      * Luo Controllerista olion, ellei sitä ole vielä aikaisemmin luotu
+     *
      * @return Controller olio
      */
+    //käytetään getInstance-metoodi singleton-luokan ainoan Controller:in olion luomiseen
     public static synchronized Controller getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Controller();
         }
         return INSTANCE;
     }
-    
+
     public void setGui(View gui) {
         this.gui = gui;
     }
+
     public void setGui2(loginView gui) {
         this.lv = gui;
     }
@@ -77,6 +85,7 @@ public class Controller {
 
     /**
      * Kirjaudu sisään
+     *
      * @param loginscreen LoginView
      * @param primaryStage Stage, jolla sisäänkirjautuminen on
      * @param nimi Käyttäjän syöttämä käyttäjänimi
@@ -84,53 +93,56 @@ public class Controller {
      */
     public void loginUser(loginView loginscreen, Stage primaryStage, String nimi, String salasana) {
         Henkilosto user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
-        
+
         //Kirjautuminen epäonnistui
         if (user == null) {
             //Ilmoita virheestä ja tyhjennä tekstikentät
             loginscreen.setErrorMessage("Salasana väärin.");
         } else {
-            
+
             //Luo view
             Stage Viewclass = new Stage();
             View v = new View(user.getHenkiloNimi());
             setGui(v);
             v.start(Viewclass);
-            
+
             primaryStage.close();
-            
+
         }
-        
+
     }
 
     /**
      * Kirjautuu ulos, sulkee View'n ja avaa LoginView
+     *
      * @param primaryStage Stage, joka on auki näppäintä painettaessa.
      */
-    public void logOut(Stage primaryStage){
-            // luo loginView ja sulje View
-            Stage loginViewclass = new Stage();
-            lv = new loginView();
-            setGui2(lv);
-            lv.start(loginViewclass);
-            primaryStage.close();
+    public void logOut(Stage primaryStage) {
+        // luo loginView ja sulje View
+        Stage loginViewclass = new Stage();
+        lv = new loginView();
+        setGui2(lv);
+        lv.start(loginViewclass);
+        primaryStage.close();
     }
+
     /**
      * Hae tietokannasta kaikki Paketti oliot
+     *
      * @return Lista kaikista tietokannassa olevista Paketti olioista
      */
-     public ArrayList<Paketti> getAllComputerNames() {
+    public ArrayList<Paketti> getAllComputerNames() {
         ArrayList<Paketti> paketit = new ArrayList<>();
-        
+
         for (Paketti paketti : dao.readPaketit()) {
             paketit.add(paketti);
         }
         return paketit;
     }
-     
-     public ArrayList<Osa> getAllOsat() {
+
+    public ArrayList<Osa> getAllOsat() {
         ArrayList<Osa> osat = new ArrayList<>();
-        
+
         for (Osa osa : dao.readOsat()) {
             osat.add(osa);
         }
@@ -138,7 +150,9 @@ public class Controller {
     }
 
     /**
-     * Funktio hakee käyttöliittymässä olevista tietokentistä tarvittavat tiedot ja luo niiden perusteella tilauksen
+     * Funktio hakee käyttöliittymässä olevista tietokentistä tarvittavat tiedot
+     * ja luo niiden perusteella tilauksen
+     *
      * @param hinta Tilaukselle myyntisivulla laskettu kokonaishinta
      */
     public void createOrder(Double hinta) {
@@ -147,18 +161,19 @@ public class Controller {
         //Luo Tilaus_rivi lista productista
         List<Tilaus_rivi> tilaukset = tab1.getTilausrivit();
         Asiakas asiakas = tab1.getCustomer();
+        Henkilosto henkilosto = user;
         //Tarkista että listassa on ainakin yksi tilaus
         if (tilaukset.isEmpty() == true) {
             //Ilmoita viewille että tilausrivejä ei ole yhtään
             tab1.lblWarning3.setText("Tilaus lista on tyhjä!");
             tab1.lblWarning3.setFill(Color.rgb(255, 0, 0));
         } else {
-            dao.luoTilaus(tilaukset,asiakas,hinta);
+            dao.luoTilaus(tilaukset, asiakas, henkilosto, hinta);
             tab1.companyTxt.clear();
             tab1.addressTxt.clear();
             tab1.emailTxt.clear();
             tab1.lblWarning3.setText("Tilaus luotu onnistuneesti!");
-            tab1.lblWarning3.setFill(Color.rgb(50, 205,50));
+            tab1.lblWarning3.setFill(Color.rgb(50, 205, 50));
             tab1.lblWarning2.setText("");
             tab1.lblWarning.setText("");
             tab1.tableTemp.getItems().clear();
@@ -166,10 +181,11 @@ public class Controller {
 
         }
     }
-    
+
     /**
      * Luo ohjelmistoon käyttäjä
-     * @param henkilo  Henkilö, joka halutaan luoda
+     *
+     * @param henkilo Henkilö, joka halutaan luoda
      */
     public void createUser(Henkilosto henkilo) {
         dao.luoHenkilo(henkilo);
@@ -177,38 +193,41 @@ public class Controller {
 
     /**
      * Hakee tietokannasta kaikki tiettyä tyyppiä vastaavat osat
+     *
      * @param tyyppi Osat jotka tietokannasta halutaan hakea
      * @return Lista halutuista osista
      */
     public ArrayList<Osa> getOsat(String tyyppi) {
         ArrayList<Osa> osat = new ArrayList<>();
-        
+
         for (Osa osa : dao.getOsat(tyyppi)) {
             osat.add(osa);
         }
-        
+
         return osat;
     }
-    
+
     /**
      * Hae tilaukset tietokannasta
+     *
      * @return Lista kaikista tietokannassa olevista tilauksista
      */
     public ArrayList<Tilaus> getTilaukset() {
         ArrayList<Tilaus> tilaukset = new ArrayList<>();
-        
+
         for (Tilaus tilaus : dao.readTilaukset()) {
             tilaukset.add(tilaus);
         }
         return tilaukset;
     }
-    
+
     public ArrayList<Object> getObjectRows(Object obj) {
         return dao.getObjectRows(obj);
     }
 
     /**
      * Tallenna tai päivitä olio tietokantaan
+     *
      * @param obj Tallennettava tai päivitettävä olio
      */
     public void objectSaveOrUpdate(Object obj) {
@@ -217,6 +236,7 @@ public class Controller {
 
     /**
      * Päivitä tai tallenna tableviewssä valittu olio
+     *
      * @param obj Tallennettava olio
      * @param obj_rows Tallennettavat oliorivit
      */
@@ -228,6 +248,7 @@ public class Controller {
 
     /**
      * Poista olio tietokannasta
+     *
      * @param obj Tietokannasta poistettava olio
      */
     public void objectDelete(Object obj) {
@@ -236,11 +257,12 @@ public class Controller {
 
     /**
      * Hae tietyn vuoden myyntitilastot tietokannasta
+     *
      * @param vuosi vuosi, jonka myyntitilastot haluat hakea
      * @return Array myyntilastoista
      */
     public double[] getSalesOfYear(Integer vuosi) {
         return dao.getSalesYear(vuosi);
     }
-    
+
 }

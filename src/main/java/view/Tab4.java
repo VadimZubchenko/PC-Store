@@ -73,10 +73,10 @@ public class Tab4 extends Tab {
         lineChart.setTitle("Myyntitiedot");
 
         XYChart.Series series = new XYChart.Series();
-        series.setName("2018");
+        series.setName("2022");
 
         XYChart.Series series2019 = new XYChart.Series();
-        series2019.setName("2019");
+        series2019.setName("2023");
 
         double[] year2019 = controller.getSalesOfYear(2019);
 

@@ -82,7 +82,7 @@ public class Osa {
         this.id = id;
     }
     /**
-     * luodaan tauluun kentän "Nimi"
+     * luodaan tauluun kentä "Nimi"
      * @return nimi palauttaa tuotteen nimen
      */
     @Column(name = "Nimi")
@@ -97,7 +97,7 @@ public class Osa {
         this.osaNimi = nimi;
     }
     /**
-     * luodaan tauluun kentän "Hinta"
+     * luodaan tauluun kentä "Hinta"
      * @return osaHinta palauttaa tuotteen hinnan
      */
     @Column(name = "Hinta")
@@ -112,7 +112,7 @@ public class Osa {
         this.osaHinta = hinta;
     }
     /**
-     * luodaan tauluun kentän "Nimi"
+     * luodaan tauluun kentä "Nimi"
      * @return nimi palauttaa asiakkaan antaman nimen
      */
     @Column(name = "VarastoMaara")

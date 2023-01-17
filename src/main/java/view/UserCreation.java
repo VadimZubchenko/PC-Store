@@ -7,6 +7,7 @@ package view;
 
 import controller.Controller;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -33,10 +34,14 @@ public class UserCreation extends Application {
 
    public void createUserPopUp() {
        Stage newStage = new Stage();
-       newStage.setTitle("Luo uusi tuote");
+       newStage.setTitle("Luo uusi käyttäjä");
        GridPane comp = new GridPane();
+       comp.setPadding(new Insets(40));
+
+
        comp.setHgap(50); // Horizontal gap
-       comp.setVgap(50); // Vertical gap
+       comp.setVgap(50); // Vertical gap'
+
 
         comp.add(name, 1, 0);
         comp.add(nimi, 2, 0);
@@ -90,7 +95,7 @@ public class UserCreation extends Application {
            
         });
        createUser.setDefaultButton(true); 
-       Scene stageScene = new Scene(comp, 450, 300);
+       Scene stageScene = new Scene(comp, 450, 350);
        newStage.setScene(stageScene);
        newStage.show();
    }

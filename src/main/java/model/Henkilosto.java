@@ -98,7 +98,7 @@ public class Henkilosto {
     }
     /**
      * 
-     * @param rooli asentaa työntekijän läyttöoikeudet toimistossa olioon
+     * @param rooli asentaa työntekijän käyttöoikeudet toimistossa olioon
      */
     public void setRooli(String rooli) {
         this.rooli = rooli;

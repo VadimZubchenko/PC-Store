@@ -108,7 +108,7 @@ public class Tilaus {
      *
      * @return työntekijan parametrit Henkilosto-oliosta
      */
-    @ManyToOne (cascade=CascadeType.ALL)
+    @ManyToOne //(cascade=CascadeType.ALL)
     @JoinColumn(name = "Henkilosto")
     public Henkilosto getHenkilosto() {
         return henkilosto;
