@@ -89,8 +89,8 @@ public class Controller {
      * @param salasana Käyttäjän syöttämä salasana
      */
     public void loginUser(loginView loginscreen, Stage primaryStage, String nimi, String salasana) {
-        Henkilosto user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
-        
+        user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
+
         //Kirjautuminen epäonnistui
         if (user == null) {
             //Ilmoita virheestä ja tyhjennä tekstikentät
