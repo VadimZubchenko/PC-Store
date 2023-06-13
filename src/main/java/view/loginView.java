@@ -32,7 +32,7 @@ import model.Localization;
  * @author RJulin
  */
 public class loginView extends Application {
-    
+
     //HK 29.3.2019 tietokantayhteyden luominen jo kirjautumisessa
     Controller controller = Controller.getInstance();
     loginView loginscreen = this;
@@ -43,80 +43,82 @@ public class loginView extends Application {
     Label passlabel = new Label();
     private Encryption encryption = Encryption.getInstance();
     private Button createUser = new Button();
-    
+
     public TextField user = new TextField();
     public PasswordField password = new PasswordField();
-    
+
     //Localisation
     Localization localization = Localization.getInstance();
-    
+
     Stage loginPrimaryStage;
-    
+
+    //override yläluokan Application metoodi
     public void start(Stage primaryStage) {
         // Käyttöliittymän rakentaminen
         try {
             loginPrimaryStage = primaryStage;
-            
+
             user.setId("user");
             user.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            
+
             password.setId("password");
             password.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            
+
             lblMessage.setId("fail");
             lblMessage.setTextFill(Color.RED);
-            
+
             loginBtn.setId("login");
-            loginBtn.setDefaultButton(true); 
+            loginBtn.setDefaultButton(true);
             loginBtn.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent ae) {
                     controller.loginUser(loginscreen, primaryStage, user.getText().toString(), password.getText().toString());
-                }}
+                }
+            }
             );
-            
+
             reconnectBtn.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent ae) {
                     controller = Controller.getInstance();
-                }}
+                }
+            }
             );
 
             createUser.setOnAction(event -> {
                 UserCreation uc = new UserCreation();
                 uc.createUserPopUp();
             });
-            
+
             GridPane grid = new GridPane();
             grid.setAlignment(Pos.CENTER);
             grid.setVgap(20);
             grid.setHgap(10);
 
-
             grid.add(userlabel, 1, 0);
             grid.add(passlabel, 2, 0);
             grid.add(user, 1, 1);
             grid.add(password, 2, 1);
-            grid.add(loginBtn,1, 2);
+            grid.add(loginBtn, 1, 2);
             grid.add(createUser, 2, 2);
             grid.add(lblMessage, 2, 3);
             grid.add(reconnectBtn, 3, 0);
             grid.add(createLanguageButtons(), 1, 4);
-            
+
             Scene scene = new Scene(grid, 750, 400);
             primaryStage.setScene(scene);
             primaryStage.show();
-            
+
             localizationSetText();
-            
-        } catch(Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    
+
     public HBox createLanguageButtons() {
         //Creating Buttons 
         Image image = new Image("Finland-icon.png");
-        
+
         Label lblLanguageFI = new Label();
         lblLanguageFI.setGraphic(new ImageView(image));
         lblLanguageFI.setOnMouseClicked(e -> {
@@ -139,14 +141,14 @@ public class loginView extends Application {
             localization.changeLocale("US");
             localizationSetText();
         });
-        
+
         HBox hLanguageButtons = new HBox();
         hLanguageButtons.getChildren().add(lblLanguageFI);
         hLanguageButtons.getChildren().add(lblLanguageRUS);
         hLanguageButtons.getChildren().add(lblLanguageEN);
         return hLanguageButtons;
     }
-    
+
     public void localizationSetText() {
         //Aseta tekstikenttien teksti uudelleen
         loginPrimaryStage.setTitle(localization.getBundle().getString("view_header"));
@@ -156,16 +158,16 @@ public class loginView extends Application {
         reconnectBtn.setText(localization.getBundle().getString("btn_reconnect"));
         createUser.setText(localization.getBundle().getString("btn_creatUser"));
     }
-    
+
     public void setErrorMessage(String message) {
         lblMessage.setText(localization.getBundle().getString("lbl_incorrect_password"));
-        
+
         user.setText("");
         password.setText("");
     }
-    
+    //the main method calls Application.launch()  
     public static void main(String[] args) {
         launch(args);
-        
+
     }
 }

@@ -46,7 +46,7 @@
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         
         <!-- MySQL -->
-        <!--see which version of myssql installed on your MacBook to get to know which version of mysql-->
+        <!--see which version of mysql installed on your MacBook to get to know which version of mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
