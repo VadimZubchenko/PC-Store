@@ -89,7 +89,7 @@ public class Controller {
      * @param salasana Käyttäjän syöttämä salasana
      */
     public void loginUser(loginView loginscreen, Stage primaryStage, String nimi, String salasana) {
-        user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
+        Henkilosto user = dao.haeKayttaja(nimi, encryption.encrypt(salasana));
         
         //Kirjautuminen epäonnistui
         if (user == null) {
