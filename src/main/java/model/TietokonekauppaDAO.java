@@ -247,7 +247,8 @@ public class TietokonekauppaDAO {
      *
      * @param tilaukset - asikkaiden valmiit tilaukset
      */
-    public void luoTilaus(List<Tilaus_rivi> tilaukset, Asiakas asiakas, Henkilosto henkilosto, Double hinta) {
+public void luoTilaus(List<Tilaus_rivi> tilaukset, Asiakas asiakas, Henkilosto henkilosto, Double hinta) {
+
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
 
@@ -255,7 +256,9 @@ public class TietokonekauppaDAO {
             istunto.save(asiakas);
 
             //Luo Tilaus olio
+
             Tilaus tilaus = new Tilaus(asiakas, henkilosto, new Date(), hinta);
+
             istunto.saveOrUpdate(tilaus);
 
             //Looppaa tilaus rivejä
