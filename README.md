@@ -1,4 +1,6 @@
-# CompuStore Manager 
+---
+# CompuStore Manager
+---
 
 ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/d25583a0-a3b6-420f-948b-e55faf8b5029)
 
@@ -38,6 +40,12 @@ The View component consists of several Java files like `View.java`, `LoginView.j
 The Controller is managed by `Controller.java` which handles the input, processes the data with the Model, and updates the View.
 
 ## Features
+- **Inventory Tracking:** Monitor stock levels in real-time.
+- **Product Management:** Add, update, and remove product details.
+- **Stock Alerts:** Receive notifications when stock levels are low.
+- **Reporting:** Generate reports on inventory status and sales.
+- **User Management:** Manage different user roles and permissions.
+- **Search and Filter:** Easily search and filter through products.
 
 ### User Interfaces
 
@@ -62,13 +70,10 @@ Password encryption using Base64 is implemented for user account management.
    ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/288187e5-13de-4167-830d-426c1036ec44)
 
 
-
 ## Testing
-
 The application was tested using JUnit 5 and TestFX. A total of 52 tests were created to validate the application's functionality, though some had to be removed due to issues with Jenkins and SonarQube.
    
    ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/686e70ac-d094-4003-bc1d-b06c9ef9abc1)
-
 
 
 ## Requirements and Implementation
@@ -101,6 +106,57 @@ The application was completed on time and met most of the functional requirement
 4. **Manage Inventory:** Warehouse staff can add, remove, and manage inventory items.
 5. **Track Finances:** Supervisors can view financial data and track sales performance through graphs.
 
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/VadimZubchenko/PC-Store.git
+    cd PC-Store
+    ```
+
+2. Install the dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Set up the environment variables. Create a `.env` file in the root directory and add the following:
+
+    ```env
+    MONGODB_URI=your_mongodb_uri
+    SECRET_KEY=your_secret_key
+    ```
+
+4. Start the development server:
+
+    ```bash
+    npm start
+    ```
+
+5. Open your browser and navigate to `http://localhost:3000`.
+
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
 ## Contact
 
-For any questions or further information, please contact the project team members.
+For any questions or further information, please contact vadimzubchenko@hotmail.com.
+
+
+---
