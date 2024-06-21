@@ -1,62 +1,106 @@
-# Ohjelmistotuotantoprojekti: PC Store / Easy warehouse management
+# CompuStore Manager 
 
-# Asennus
+![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/d25583a0-a3b6-420f-948b-e55faf8b5029)
 
-## Asenettavat työkalut:
+## Overview
 
-- IDE: Apache NetBeans IDE 12.6
-- Java: 1.8.0_341
-- Maven
-- JavaFX
-- MySql
+Developed as a desktop application this an inventory management tool designed for a small brick-and-mortar computer store. The application is intended for internal use to support sales, inventory management, and financial tracking. It features a simple and straightforward graphical interface to facilitate ease of use.
 
-## Johdanto
+## Technologies and Tools
 
-Projektin tavoitteena oli luoda varastonhallintatyökalu pienelle tietokonekaupalle. Sovellus tulee yrityksen sisäiseen käyttöön ja suuntautuu myynnin ja varastonhallinnan tueksi, joten sen on tarkoitus olla graafisesti yksinkertainen ja mahdollisimman suoraviivainen.
+### Scrum methodology
 
-## Lähtötiedot
+The project was executed using the Scrum methodology, enhanced by the Agilefant application. User stories and use cases were defined in Agilefant, which allowed us to monitor and manage the progress of the application and the working hours of the team. Out of the 30 user stories in Agilefant, we completed 28. Figure 1 presents the user stories in Agilefant.
 
-Sidosryhmä koostuu myyntihenkilöistä, varastomiehistä, esimiehestä ja ylläpitäjästä. Jo- kaiselle käyttäjäryhmälle luodaan heille suunnatut käyttöliittymät, eivätkä he pääse mui- den käyttäjien näkymään. Tästä poikkeuksena ylläpitäjä, jolla on käyttöoikeus koko so- vellukseen. Sovellus koostuu myyntisivusta, varastosivusta, tilaussivusta ja taloussi- vusta. Myyntisivulla myyntihenkilö voi luoda tilauksen saatavilla olevista osista ja tietokonepaketeista ja täyttää tilaukseen asiakastiedot. Varastosivulla varastohenkilöstö voi hallita varastoa ja lisätä tai poistaa sieltä tuotteita. Tilaussivulla kaikki työntekijät näkevät parhaillaan olevat tilaukset ja taloussivulla esimies voi tarkkailla yrityksen taloustilan- netta.
+![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/de5880e9-99f8-48ca-b03b-d0904f893109)
 
-## Ohjelmia- ja ohjelmistoja
+### Tools
+- **Programming Languages:** Java
+- **Frameworks:** Hibernate, MVC
+- **Databases:** MariaDB, SQL
+- **Development Tools:** Apache NetBeans, Maven, Jenkins, SonarQube, Agilefant, GitHub
+- **Other Technologies:** CSS, XML
 
-Sovellus luotiin Apache NetBeans-ohjelmalla käyttäen Maven- työkalua. Ohjelmointi ja sovelluksen luominen suoritettiin käyttäen seuraavia ohjelmointikieliä, relaatiotietokanta- järjestelmiä ja sovelluskehyksiä: Java, Hibernate, SQL, MariaDB, CSS ja XML. Aputyö- kaluina käytettiin Jenkins- ja SonarQube palveluita ja versionhallinnassa käytettiin Git- hubia. Tietokanta on Metropolian Educloud SSH-palvelimella, jota käytettiin Putty-ohjelman avulla.
+## Architecture
 
-## MVC
+The application follows the MVC (Model-View-Controller) architectural pattern.
 
-Varastonhallintasovellus on arkkitehtuuriltaan MVC-mallin mukainen. Käyttöliittymän nä- kymä koostuu yhdeksästä eri tiedostosta: View.java, LoginView.java, Tab1.java, Tab2.java, Tab3.java, Tab4.java, UserCreation.java, InputValidatori.java ja PackagePopUp.java. Malli-osio koostuu tiedostoista Asiakas.java, Henkilosto.java, Osa.java, Paketti.java, Paketti_rivi.java, Product.java, TietokonekauppaDAO.java, Tilaus.java ja Tilaus_rivi.java, Encryption.java ja Localization.java. Kontrolleri-osiossa on vain control- ler.java-tiedosto. Tyylit, lokalisaatiot ja hibernate määritellään Other Sources-kansiossa.
+![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/5d6b30cc-1488-48bb-be3a-0a8285dc73e2)
 
-## Testaus
 
-Sovelluksen testaus suoritettiin käyttämällä JUnit 5 ja TestFX testiympäristöjä. Testejä muodostui yhteensä 52, mutta osa jouduttiin poistamaan Jenkins ja SonarQube ongelmien takia. TestFX testit toimivat ohjelmassa erittäin mallikkaasti, mutta nämä kaikki jouduttiin karsimaan edellä mainittujen syiden takia. Kuvassa 3 esitetään sovelluksen tes- tien tuloksia. Testeissä testataan sovelluksen tärkeimpiä toimintoja, joiden avulla sovel- luksesta löydettiin haavoittuvaisuuksia ja virheitä.
+### Model
+The Model component includes classes such as `Asiakas.java`, `Henkilosto.java`, `Osa.java`, `Paketti.java`, `Product.java`, and others which handle the data and business logic.
 
-## Toiminta
+### View
+The View component consists of several Java files like `View.java`, `LoginView.java`, `Tab1.java`, `Tab2.java`, `Tab3.java`, `Tab4.java`, and others which define the user interface.
 
-Sovellus käynnistyy LoginView.java tiedostosta, jossa käyttäjä kirjautuu tunnuksella ja salasanalla sovellukseen. Käyttäjä voi myös luoda uudet käyttäjätunnukset, jolloin sala- sana salataan tietokantaan käyttäen Base64- kryptausta. Kirjautumisen yhteydessä käyttäjä voi myös valita sovelluksen kielen, mutta sen voi vaihtaa myös myöhemmin so- vellusta käyttäessä.
-Kirjautumisen jälkeen aukeaa käyttäjälle suunnattu sivu, eikä hän pääse muiden käyttä- jien sivuille. Tästä poikkeuksena sovelluksen ylläpitäjä, jolla on oikeudet kaikille sivuille. Kuvassa 4 näkyy sovelluksen kirjautumisnäkymä.
+### Controller
+The Controller is managed by `Controller.java` which handles the input, processes the data with the Model, and updates the View.
 
-Sovelluksen myyntisivulla eli Tab1.java tiedostossa käyttäjä voi tarkastella varastossa olevia tuotteita, jotka haetaan taulukkoon tietokannasta. Tuotteita ovat paketit ja osat, joista voi luoda tilauksen, jolloin kyseisen tuotteen kokonaismäärä varastossa pienenee tilaukseen varatulla määrällä. Käyttäjä voi vaihtaa taulukon näkymää painamalla ra- diopainikkeita, jolloin taulukossa näytetään osat tai paketit valinnan mukaan. Taulukon syötettä voi myös suodattaa hakukentällä, jolloin taulukossa näytetään haun mukaiset tuotteet. Haku on toteutettu FilterList- oliolla, jolloin haku on dynaaminen ja nopea. Va- rastotaulukosta voi valita haluamansa tuotteet ja näiden määrät, joista voi tehdä tilauk- sen. Tilauksen luonti vaatii, että tilaukseen on valittu tuotteita ja asiakaskentät on täytetty. Sovelluksessa on virheilmoitukset, jotka kertovat käyttäjän virhekäytöksestä. Tauluk- koon ei voi lisätä tyhjiä rivejä eikä ilman valintaa voi riviä myöskään poistaa. Näistä tulee myös käyttäjälle virheilmoitus.
+## Features
 
-Varastosivulla eli tiedostoissa Tab2.java ja PackagePopUp.java käyttäjä voi valita halua- mansa tuotteet vasemmalta, jolloin taulukkoon tulee tietokannasta saatavilla olevat tuot- teet ja näiden tiedot, kuten kuvitteellinen varastopaikka. Sivulla voi myös luoda uusia tuotteita, eli osia ja paketteja. Paketti luodaan kasaamalla osista paketti, jolloin ohjelma laskee osien hinnan ja lisää tähän prosentuaalisen katteen.'
+### User Interfaces
 
-Tilaukset sivulla tiedostoissa Tab3.java listataan taulukkoon kaikki tehdyt tilaukset. Ti- lauksista näkee tilauksen ID:n, asiakastiedot, tilauspäivämäärän ja tilauksen yhteishin- nan. Valitsemalla taulukosta yhden tilauksen, tulee alempaan taulukkoon näkyviin tilauk- sen tilausrivit eli tilatut tuotteet. Valitun tilauksen voi myös poistaa halutessaan.
+- **Sales Page:** Allows sales personnel to create orders from available parts and computer packages, fill in customer information, and adjust order quantities.
+      ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/0ae510af-5d23-4882-b9b2-f8026e7475b9)
 
-Taloussivulla tiedostossa Tab4.java rakennetaan graafi myydyistä tilauksista. Graafi päi- vittyy automaattisesti jokaisen tilauksen luonnin yhteydessä.
+- **Inventory Page:** Enables warehouse staff to manage inventory, add or remove products, and create packages from parts.  
+      ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/cd5f350c-8782-457c-b83a-4142d135dc80)
 
-Sovelluksen NavBar luodaan tiedostossa View.java, jolloin se näkyy jatkuvasti muiden välilehtien päällä kuten halusimme. NavBar kertoo kirjautuneen käyttäjän, kirjautumis- ajan ja siitä voi vaihtaa sovelluksen kieltä tai kirjautua ulos. Uloskirjautuminen ohjaa käyt- täjän takaisin kirjautumissivulle, jossa käyttäjä voi kirjautua takaisin tai sulkea sovelluk- sen.
+- **Orders Page:** Lists all current orders with details like order ID, customer information, order date, and total price. Orders can be selected for detailed view or deletion.
+     ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/a3d71f52-ec2c-4176-addd-92f2f504b3fe)
 
-## Issues and their fixing.
+- **Finance Page:** Displays a graph of sales data, which is updated automatically with each new order.
+     ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/f8296c7f-fa51-4ebe-ab14-554afa1a7f7b)
 
-Starting Error reason: install Java 1.8.341
+### Localization
+The application supports localization, allowing users to switch languages.
 
-Next change mySql dependences in pom.xml according your MacBook installed mysql version
+### Security
+Password encryption using Base64 is implemented for user account management.
 
-Create database Teitokonekauppa and all needed tables esim. using command line or ’mySql Workbanch’
+   ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/288187e5-13de-4167-830d-426c1036ec44)
 
-After creating DB you can check in mySql Workbanch EER Diagram by Database –> Reverse Engineer
 
-Final ISSUE: After creating all needed tables there still was an error message "Schema-validation: missing table [hibernate_sequence]”
 
-1. add to all tables anotation: @GeneratedValue(strategy=GenerationType.IDENTITY)
-2. after that you will see a log message, which table or column are missed or has an error in their name.
-   - fault was in the name ”Henkilisto” but in code anotation is ”Henkilosto” in ”TILAUS” table - ”Hyllynumro” in the code anatation of ”OSA” table but in table itself it was as a ”Hyllynnumero”
+## Testing
+
+The application was tested using JUnit 5 and TestFX. A total of 52 tests were created to validate the application's functionality, though some had to be removed due to issues with Jenkins and SonarQube.
+   
+   ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/686e70ac-d094-4003-bc1d-b06c9ef9abc1)
+
+
+
+## Requirements and Implementation
+
+### Initial Requirements (Project 1)
+- Project initiation and application framework creation
+- Hibernate setup
+- Connection to Metropolia's remote server
+- Maven project setup
+- Jenkins and Agilefant integration
+
+### Additional Requirements (Project 2)
+- Support for a new client: a Russian computer company
+- New functional requirements including reusable component implementation, search capabilities, inventory value management, and device configuration suggestions
+- User interface improvements and localization
+
+### Non-Functional Requirements
+- Code refactoring to remove "bad smells"
+- Use of design patterns for code maintainability and extensibility
+
+## Summary
+
+The application was completed on time and met most of the functional requirements set out in Project 1. While some non-functional requirements were not fully implemented due to time constraints, the application overall serves as a comprehensive inventory management tool for the intended use case. With additional time, further improvements to the user interface and adherence to design guidelines could be made.
+
+## Usage
+
+1. **Login:** Users log in with a username and password, which are encrypted and stored in the database.
+2. **Navigate:** Use the NavBar to switch between different sections (Sales, Inventory, Orders, Finance).
+3. **Create Orders:** Sales personnel can create and manage customer orders.
+4. **Manage Inventory:** Warehouse staff can add, remove, and manage inventory items.
+5. **Track Finances:** Supervisors can view financial data and track sales performance through graphs.
+
+## Contact
+
+For any questions or further information, please contact the project team members.
