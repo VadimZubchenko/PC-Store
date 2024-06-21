@@ -159,7 +159,6 @@ Before you begin, ensure you have the following installed on your system:
     - Login with your credentials 
 
 
-
 ## Project Team
 
 - Vadim Zubchenko
