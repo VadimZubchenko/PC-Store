@@ -154,7 +154,7 @@ Before you begin, ensure you have the following installed on your system:
 
 5. Run the project:
 
-    - In Apache NetBeans, right-click on the project and select `Run`.
+    - In Apache NetBeans, right-click on the loginView.java file and select `Run file`.
 
 
 
