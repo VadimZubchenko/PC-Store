@@ -252,7 +252,7 @@ public void luoTilaus(List<Tilaus_rivi> tilaukset, Asiakas asiakas, Henkilosto h
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
 
-            //Tallenna asiakas tietokantaan
+            //Tallenna asiakas
             istunto.save(asiakas);
 
             //Luo Tilaus olio
