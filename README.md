@@ -158,6 +158,7 @@ Before you begin, ensure you have the following installed on your system:
     - Make registration with login and password
     - Login with your credentials 
 
+
 ## Project Team
 
 - Vadim Zubchenko
