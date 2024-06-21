@@ -16,11 +16,15 @@ The project was executed using the Scrum methodology, enhanced by the Agilefant 
 
 ![image](https://github.com/VadimZubchenko/PC-Store/assets/36922064/de5880e9-99f8-48ca-b03b-d0904f893109)
 
-### Tools
+### Development Tools
 - **Programming Languages:** Java
 - **Frameworks:** Hibernate, MVC
-- **Databases:** MariaDB, SQL
+- **Databases:** MySQL
 - **Development Tools:** Apache NetBeans, Maven, Jenkins, SonarQube, Agilefant, GitHub
+- **Jenkins:** For continuous integration and deployment, set up a Jenkins pipeline for automated builds.
+- **SonarQube:** For static code analysis, integrate SonarQube to ensure code quality.
+- **Agilefant:** For agile project management, use Agilefant to track your tasks and sprints.
+- **GitHub:** For version control, use GitHub to manage your repository and collaborate with others.
 - **Other Technologies:** CSS, XML
 
 ## Architecture
@@ -78,14 +82,13 @@ The application was tested using JUnit 5 and TestFX. A total of 52 tests were cr
 
 ## Requirements and Implementation
 
-### Initial Requirements (Project 1)
+### Initial Requirements
 - Project initiation and application framework creation
 - Hibernate setup
-- Connection to Metropolia's remote server
 - Maven project setup
 - Jenkins and Agilefant integration
 
-### Additional Requirements (Project 2)
+### Additional Requirements
 - Support for a new client: a Russian computer company
 - New functional requirements including reusable component implementation, search capabilities, inventory value management, and device configuration suggestions
 - User interface improvements and localization
@@ -94,9 +97,6 @@ The application was tested using JUnit 5 and TestFX. A total of 52 tests were cr
 - Code refactoring to remove "bad smells"
 - Use of design patterns for code maintainability and extensibility
 
-## Summary
-
-The application was completed on time and met most of the functional requirements set out in Project 1. While some non-functional requirements were not fully implemented due to time constraints, the application overall serves as a comprehensive inventory management tool for the intended use case. With additional time, further improvements to the user interface and adherence to design guidelines could be made.
 
 ## Usage
 
@@ -106,7 +106,6 @@ The application was completed on time and met most of the functional requirement
 4. **Manage Inventory:** Warehouse staff can add, remove, and manage inventory items.
 5. **Track Finances:** Supervisors can view financial data and track sales performance through graphs.
 
-
 ---
 
 ## Getting Started
@@ -115,9 +114,11 @@ The application was completed on time and met most of the functional requirement
 
 Before you begin, ensure you have the following installed on your system:
 
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/)
-- [MongoDB](https://www.mongodb.com/)
+- [Java JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [Apache NetBeans](https://netbeans.apache.org/)
+- [Maven](https://maven.apache.org/)
+- [MySQL](https://www.mysql.com/)
+- [Git](https://git-scm.com/)
 
 ### Installation
 
@@ -128,27 +129,41 @@ Before you begin, ensure you have the following installed on your system:
     cd PC-Store
     ```
 
-2. Install the dependencies:
+2. Open the project in Apache NetBeans:
+
+    - Open Apache NetBeans.
+    - Navigate to `File > Open Project`.
+    - Select the `PC-Store` project directory.
+
+3. Configure MySQL:
+
+    - Create a new database in MySQL.
+    - Update the database configuration in `src/main/resources/hibernate.cfg.xml` with your MySQL database details:
+
+    ```xml
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/your_database_name</property>
+    <property name="hibernate.connection.username">your_username</property>
+    <property name="hibernate.connection.password">your_password</property>
+    ```
+
+4. Build the project with Maven:
 
     ```bash
-    npm install
+    mvn clean install
     ```
 
-3. Set up the environment variables. Create a `.env` file in the root directory and add the following:
+5. Run the project:
 
-    ```env
-    MONGODB_URI=your_mongodb_uri
-    SECRET_KEY=your_secret_key
-    ```
+    - In Apache NetBeans, right-click on the project and select `Run`.
 
-4. Start the development server:
 
-    ```bash
-    npm start
-    ```
 
-5. Open your browser and navigate to `http://localhost:3000`.
+## Project Team
 
+- Vadim Zubchenko
+- Rasmus Julin
+- Sami Sikkilä
+- Hannu Korhonen
 
 ## License
 
@@ -156,7 +171,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or further information, please contact vadimzubchenko@hotmail.com.
+For any questions or further information, please contact vadimzubchenko@hotmail.com
 
 
 ---
