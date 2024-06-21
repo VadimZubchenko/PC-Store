@@ -251,7 +251,7 @@ public class TietokonekauppaDAO {
         try (Session istunto = istuntotehdas.openSession()) {
             istunto.beginTransaction();
 
-            //Tallenna asiakas
+            //Tallenna asiakas tietokantaan
             istunto.save(asiakas);
 
             //Luo Tilaus olio

@@ -145,7 +145,7 @@ public class Controller {
 
     /**
      * Funktio hakee käyttöliittymässä olevista tietokentistä tarvittavat tiedot ja luo niiden perusteella tilauksen
-     * @param hinta Tilaukselle myyntisivulla laskettu kokonaishinta
+     * @param hinta eli tilaukselle myyntisivulla laskettu kokonaishinta
      */
     public void createOrder(Double hinta) {
         Tab1 tab1 = Tab1.getInstance();
